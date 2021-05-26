@@ -35,27 +35,8 @@ class HomeController < ApplicationController
       @api_color = 'maroon'
       @api_description = 'Emercy Conditions. The entire population is more likely to be affected'
     end
-    # @api_color = case @final_output
-    #              when 0..50
-    #                'green',
-    #                @api_description = 'Good'
-    #              when 51..100
-    #                'yellow',
-    #                @api_description = 'Moderate'
-    #              when 101..150
-    #                'orange',
-    #                @api_description = 'Unhealthy for Sensitive Groups (USG)'
-    #              when 151..200
-    #                'red',
-    #                @api_description = 'Unhealthy'
-    #              when 201..300
-    #                'purple',
-    #                @api_description = 'Very Unhealthy'
-    #              when 301..500
-    #                'maroon',
-    #                @api_description = 'Hazardous'
-    #              else
-    #                'gray'
-    #              end
+  end
+
+  def zipCode
   end
 end

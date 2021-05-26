@@ -38,6 +38,12 @@ class HomeController < ApplicationController
   end
 
   def zipcode
-  @inputvalue = params[:zipcode]
+    @inputvalue = params[:zipcode]
+
+    if params[:zipcode] == ''
+      @inputvalue = 'Hey you forgot to enter a zipcode!'
+    elsif params[:zipcode]
+      # Do API stuff
+    end
   end
 end

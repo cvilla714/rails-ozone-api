@@ -27,9 +27,9 @@
           <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
         </li>
       </ul>
-      <%= form_tag somethig_path, :method=>'POST' do %>
+      <%= form_tag zipcode_path, :method=>'POST' do %>
       <div class="d-flex">
-      <%= text_field_tag 'zipcode',nill,placehoder:"Search Zipcode",class:"form-control me-2" %>
+      <%= text_field_tag 'zipcode',nil,placehoder:"Search Zipcode",class:"form-control me-2" %>
        <%= submit_tag 'Search',class:"btn btn-outline-success"%>
       <% end %>
     </div>

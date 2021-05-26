@@ -3,7 +3,8 @@ class HomeController < ApplicationController
     require 'net/http'
     require 'json'
 
-    @url = 'https://www.airnowapi.org/aq/observation/zipCode/current/?format=application/json&zipCode=33102&distance=0&API_KEY=457C10CA-B388-404F-AE61-77FD758B49EF'
+    # @url = 'https://www.airnowapi.org/aq/observation/zipCode/current/?format=application/json&zipCode=07101&distance=0&API_KEY=457C10CA-B388-404F-AE61-77FD758B49EF'
+    @url = 'https://www.airnowapi.org/aq/observation/zipCode/current/?format=application/json&zipCode=07101&distance=25&API_KEY=457C10CA-B388-404F-AE61-77FD758B49EF'
     @uri = URI(@url)
     @response = Net::HTTP.get(@uri)
     @output = JSON.parse(@response)
@@ -46,19 +47,32 @@ class HomeController < ApplicationController
       require 'net/http'
       require 'json'
 
-      @url = "https://www.airnowapi.org/aq/observation/zipCode/current/?format=application/json&zipCode=#{@inputvalue}&distance=0&API_KEY=457C10CA-B388-404F-AE61-77FD758B49EF"
+      # @url = "https://www.airnowapi.org/aq/observation/zipCode/current/?format=application/json&zipCode=#{@inputvalue}&distance=0&API_KEY=457C10CA-B388-404F-AE61-77FD758B49EF"
+      @url = "https://www.airnowapi.org/aq/observation/zipCode/current/?format=application/json&zipCode=#{@inputvalue}&distance=25&API_KEY=457C10CA-B388-404F-AE61-77FD758B49EF"
       @uri = URI(@url)
       @response = Net::HTTP.get(@uri)
       @output = JSON.parse(@response)
 
-      @final_output = if @output.empty?
+      # @city = @output[0]['ReportingArea']
+      # @state = @output[0]['StateCode']
+
+      @final_output = if @output.empty? || @output.nil?
                         'Error'
                       else
                         @output[0]['AQI']
                       end
 
-      @city = @output[0]['ReportingArea']
-      @state = @output[0]['StateCode']
+      @city = if @output[0]['ReportingArea'].empty? || @output[0]['ReportingArea'].nil?
+                'Please Provide a valid zipcode'
+              else
+                @output[0]['ReportingArea']
+              end
+
+      @state = if @output[0]['StateCode'].empty? || @output[0]['StateCode'].nil?
+                 'Please Provide a valid zipcode to display the information'
+               else
+                 @output[0]['StateCode']
+               end
 
       if @final_output == 'Error'
         @api_color = 'gray'

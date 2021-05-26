@@ -37,6 +37,7 @@ class HomeController < ApplicationController
     end
   end
 
-  def zipCode
+  def zipcode
+  @inputvalue = params[:zipcode]
   end
 end

@@ -57,8 +57,16 @@ class HomeController < ApplicationController
                         @output[0]['AQI']
                       end
 
-      @city = @output[0]['ReportingArea']
-      @state = @output[0]['StateCode']
+      @city = if @output[0]['ReportingArea'].empty?
+                'You did not provide a valid zip code'
+              else
+                @output[0]['ReportingArea']
+              end
+      @state = if @output[0]['StateCode'].empty?
+                 'You did not provide a valid zipcode'
+               else
+                 @output[0]['StateCode']
+               end
 
       if @final_output == 'Error'
         @api_color = 'gray'
